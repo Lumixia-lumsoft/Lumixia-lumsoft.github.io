@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Glass Website</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: white;
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(circle at 20% 20%, #6d5dfc 0%, transparent 35%),
+                radial-gradient(circle at 80% 30%, #00c6ff 0%, transparent 35%),
+                radial-gradient(circle at 50% 90%, #ff4ecd 0%, transparent 40%),
+                #080812;
+        }
+
+        /* Background glow balls */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.55;
+            pointer-events: none;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 250px;
+            height: 250px;
+            background: #7c5cff;
+            top: 10%;
+            left: 5%;
+        }
+
+        .orb2 {
+            width: 300px;
+            height: 300px;
+            background: #00d9ff;
+            right: 5%;
+            top: 40%;
+            animation-delay: 2s;
+        }
+
+        .orb3 {
+            width: 220px;
+            height: 220px;
+            background: #ff3bd4;
+            left: 40%;
+            bottom: 0;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(30px, -40px);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            width: min(1100px, 90%);
+            margin: 25px auto;
+            padding: 16px 22px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.20);
+            border-radius: 22px;
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.25),
+                inset 0 1px rgba(255,255,255,0.15);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 1;
+        }
+
+        /* Main */
+        main {
+            width: min(1100px, 90%);
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 50px;
+
+            background: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.18);
+
+            backdrop-filter: blur(15px);
+
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: clamp(50px, 8vw, 100px);
+            line-height: 0.95;
+            letter-spacing: -5px;
+            margin-bottom: 25px;
+
+            background: linear-gradient(
+                120deg,
+                white,
+                #b7baff,
+                #7eeaff
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            max-width: 650px;
+            margin: auto;
+
+            font-size: 19px;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.72);
+        }
+
+        /* Buttons */
+        .buttons {
+            margin-top: 35px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 15px 25px;
+            border-radius: 15px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.22);
+
+            backdrop-filter: blur(20px);
+
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-4px);
+            background: rgba(255,255,255,0.22);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        .primary {
+            background: rgba(255,255,255,0.90);
+            color: #111;
+        }
+
+        .primary:hover {
+            background: white;
+        }
+
+        /* Glass cards */
+        .cards {
+            margin-top: 100px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            padding: 30px;
+            text-align: left;
+
+            border-radius: 25px;
+
+            background: rgba(255,255,255,0.09);
+            border: 1px solid rgba(255,255,255,0.18);
+
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+
+            box-shadow:
+                0 20px 70px rgba(0,0,0,0.25),
+                inset 0 1px rgba(255,255,255,0.15);
+
+            transition: 0.35s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.14);
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+            margin-bottom: 20px;
+
+            background: rgba(255,255,255,0.12);
+            font-size: 24px;
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            margin: 80px 0 30px;
+            color: rgba(255,255,255,0.45);
+        }
+
+        /* Mobile */
+        @media (max-width: 750px) {
+            nav a {
+                display: none;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                letter-spacing: -3px;
+            }
+
+            main {
+                margin-top: 70px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <nav>
+        <div class="logo">LUMIXIA</div>
+
+        <div>
+            <a href="#">Home</a>
+            <a href="#">Projects</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+    <main>
+
+        <div class="badge">
+            ✦ Welcome to the future
+        </div>
+
+        <h1>
+            Beautiful.<br>
+            Simple.<br>
+            Glass.
+        </h1>
+
+        <p class="subtitle">
+            A modern glassmorphism website with smooth blur,
+            glowing backgrounds and elegant animations.
+        </p>
+
+        <div class="buttons">
+            <button class="primary" onclick="start()">Get Started</button>
+            <button onclick="learn()">Learn More</button>
+        </div>
+
+        <section class="cards">
+
+            <div class="card">
+                <div class="icon">⚡</div>
+                <h2>Fast</h2>
+                <p>
+                    Lightweight and optimized for a smooth
+                    browsing experience.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">✨</div>
+                <h2>Beautiful</h2>
+                <p>
+                    Modern glass effects, blur and subtle
+                    animations create a premium interface.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔒</div>
+                <h2>Secure</h2>
+                <p>
+                    Designed with a clean structure that can
+                    grow with your project.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        © 2026 Lumixia — Built with HTML & CSS
+    </footer>
+
+    <script>
+        function start() {
+            alert("Welcome to Lumixia! 🚀");
+        }
+
+        function learn() {
+            alert("More information coming soon.");
+        }
+    </script>
+
+</body>
+</html>
